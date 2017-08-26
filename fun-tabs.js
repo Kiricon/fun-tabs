@@ -26,6 +26,7 @@ template.innerHTML = `
             height: 2px;
             width: 100%;
             background-color: var(--fun-tabs-color, var(--secondary-color, #673AB7));
+            transition: all ease 0.3s;
         }
     </style>
     <slot></slot>
@@ -44,7 +45,7 @@ class FunTabs extends HTMLElement {
      *  attribute.
      */
     static get observedAttributes() {
-        return [];
+        return ['selected'];
     };
 
     constructor() {
@@ -91,6 +92,7 @@ class FunTabs extends HTMLElement {
      */
     attributeChangedCallback(name, oldValue, newValue) {
         // respond to a changed attribute here
+        console.log(name+" "+newValue);
     }
 
     changeSelectedTab(i) {
