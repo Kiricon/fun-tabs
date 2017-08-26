@@ -25,7 +25,7 @@ require("fun-tabs");
 
 ## Usage
 ```HTML
-    <fun-tabs selected="2">
+    <fun-tabs selected="0">
         <fun-tab>Tab 1</fun-tab>
         <fun-tab>Tab 2</fun-tab>
         <fun-tab>Tab 3</fun-tab>
