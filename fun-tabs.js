@@ -8,7 +8,18 @@ template.innerHTML = `
         :host {
             display: block;
         }
+
+        fun-tab {
+            opacity: 0.8;
+            transition: opacity ease 0.3s;
+            cursor: pointer;
+        }
+
+        fun-tab:hover {
+            opacity: 1;
+        }
     </style>
+    <slot></slot>
 `;
 
 /**
