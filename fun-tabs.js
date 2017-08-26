@@ -7,7 +7,6 @@ template.innerHTML = `
     <style>
         :host {
             display: table;
-            border: solid 1px #aaa;
         }
 
         ::slotted(fun-tab) {
@@ -27,7 +26,7 @@ template.innerHTML = `
         div {
             height: 2px;
             background-color: var(--fun-tabs-color, var(--secondary-color, #673AB7));
-            transition: all ease 0.3s;
+            transition: all ease 0.15s;
         }
     </style>
     <slot></slot>
@@ -59,6 +58,8 @@ class FunTabs extends HTMLElement {
         // add any initial variables here
 
         this.tabWidth = 0;
+        this.oldValue = 0;
+        this.isInitial = true;
     }
 
     /**
@@ -75,10 +76,13 @@ class FunTabs extends HTMLElement {
             });
         }
         
+        let initialIndex = this.getAttribute('selected') || 0;
+
         this.tabWidth = this.offsetWidth / tabs.length;
         this.div = this.shadowRoot.querySelector('div');
         this.div.style.width = `${this.tabWidth}px`;
-        this.setSelectedTab(this.getAttribute('selected'));
+        this.div.style.marginLeft = `${this.tabWidth*initialIndex}px`
+        this.setSelectedTab(initialIndex);
     }
 
     /**
@@ -106,16 +110,43 @@ class FunTabs extends HTMLElement {
     }
 
     changeSelectedTab(i) {
+        this.oldValue = this.getAttribute('selected');
         this.setAttribute('selected', i);
     }
 
     setSelectedTab(newValue) {
-        this.div.style.marginLeft = `${this.tabWidth*newValue}px`;
+        this.moveHighLight(newValue);
         let tabs = this.querySelectorAll('fun-tab');
         for(let i = 0; i < tabs.length; i++) {
             tabs[i].className = '';
         }
         tabs[newValue].className = 'selected';
+    }
+
+    moveHighLight(i) {
+
+        if(this.isInitial) {
+            this.div.style.marginLeft = `${this.tabWidth*i}px`;
+            this.div.style.width = `${this.tabWidth}px`;
+            this.isInitial = false;
+        }else if(i < this.oldValue) {
+            let diff =  this.oldValue - i + 1;
+            this.div.style.marginLeft = `${this.tabWidth*i}px`;
+            this.div.style.width = `${this.tabWidth*diff}px`;
+            setTimeout(() => {
+                this.div.style.width = `${this.tabWidth}px`;
+            }, 150);
+
+        }else if( i > this.oldValue) {
+            let diff = i - this.oldValue + 1;
+            this.div.style.width = `${this.tabWidth*diff+1}px`;
+            setTimeout(() => {
+                this.div.style.marginLeft = `${this.tabWidth*i}px`;
+                this.div.style.width = `${this.tabWidth}px`;
+            }, 150);
+        }
+
+        
     }
 }
 
