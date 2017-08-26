@@ -1,0 +1,27 @@
+{
+  "name": "fun-tabs",
+  "version": "1.0.0",
+  "description": "A custom element implementing a set of tabs",
+  "main": "fun-tabs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kiricon/fun-tabs.git"
+  },
+  "keywords": [
+    "component",
+    "fun-tabs",
+    "tab",
+    "tabs",
+    "custom",
+    "element"
+  ],
+  "author": "Dominic Valenciana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kiricon/fun-tabs/issues"
+  },
+  "homepage": "https://github.com/Kiricon/fun-tabs#readme"
+}
