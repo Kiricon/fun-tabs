@@ -1,45 +1,48 @@
-# fun-input
-An HTML custom element implementing the `<fun-input>` element.
+# fun-tabs
+An HTML custom element implementing the `<fun-tabs>` tag.
 
-![fun-input in action](https://github.com/Kiricon/fun-input/raw/master/screencapture.gif)
+![fun-input in action](https://github.com/Kiricon/fun-tabs/raw/master/screencapture.gif)
 
 ## Setup
 
 ### Installation
 ```
-npm i fun-input
+npm i fun-tabs
 ```
 
 ---
 
 ```Html
-<script src="node_modules/fun-input/fun-input.js"></script>
+<script src="node_modules/fun-tabs/fun-tabs.js"></script>
 ```
 or if you're bundling
 ```Javascript
-import "fun-input";
+import "fun-tabs";
 // or
-require("fun-input");
+require("fun-tabs");
 ```
 
 
 ## Usage
 ```HTML
-<fun-input type="text" name="funInput" placeholder="Enter text here..."></fun-input>
-<fun-input type="password" name="funInput2" placeholder="Enter password here..."></fun-input>
+    <fun-tabs selected="2">
+        <fun-tab>Tab 1</fun-tab>
+        <fun-tab>Tab 2</fun-tab>
+        <fun-tab>Tab 3</fun-tab>
+    </fun-tabs>
 ```
 
 
 ## Customization
-You can customize the color of the `fun-input` by assigning values to css elements. 
+You can customize the color of the `fun-tabs` by assigning values to css elements. 
 
-The who css elements that affect `fun-input` are `--fun-input-color` and `--primary-color`.
+The two css elements that affect `fun-tabs` are `--fun-tabs-color` and `--secondary-color`.
 
 You can set there values like so
 
 ```CSS
     :root {
-        --fun-input-color: red; /* if both are set --fun-input-color takes precedence */
-        --primary-color: red; 
+        --fun-tabs-color: red; /* if both are set --fun-tabs-color takes precedence */
+        --secondary-color: red; 
     }
 ```
