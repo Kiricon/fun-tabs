@@ -6,20 +6,30 @@ const template = document.createElement("template");
 template.innerHTML = `
     <style>
         :host {
-            display: block;
+            display: table;
+            border: solid 1px #aaa;
         }
 
         ::slotted(fun-tab) {
             opacity: 0.6;
             transition: opacity ease 0.3s;
             cursor: pointer;
+            padding: 10px;
+            display: inline-block;
         }
 
        ::slotted(fun-tab:hover) {
             opacity: 1;
         }
+
+        div {
+            height: 2px;
+            width: 100%;
+            background-color: var(--fun-tabs-color, var(--secondary-color, #673AB7));
+        }
     </style>
     <slot></slot>
+    <div></div>
 `;
 
 /**
@@ -53,7 +63,13 @@ class FunTabs extends HTMLElement {
      * cases.
      */
     connectedCallback() {
-        
+        let tabs = this.querySelectorAll('fun-tab');
+        let self = this;
+        for(let i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener('click', () => {
+                self.changeSelectedTab(i);
+            });
+        }
     }
 
     /**
@@ -75,6 +91,10 @@ class FunTabs extends HTMLElement {
      */
     attributeChangedCallback(name, oldValue, newValue) {
         // respond to a changed attribute here
+    }
+
+    changeSelectedTab(i) {
+        this.setAttribute('selected', i);
     }
 }
 
