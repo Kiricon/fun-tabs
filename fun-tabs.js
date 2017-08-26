@@ -24,7 +24,6 @@ template.innerHTML = `
 
         div {
             height: 2px;
-            width: 100%;
             background-color: var(--fun-tabs-color, var(--secondary-color, #673AB7));
             transition: all ease 0.3s;
         }
@@ -56,6 +55,8 @@ class FunTabs extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
 
         // add any initial variables here
+
+        this.tabWidth = 0;
     }
 
     /**
@@ -71,6 +72,10 @@ class FunTabs extends HTMLElement {
                 self.changeSelectedTab(i);
             });
         }
+        
+        this.tabWidth = this.offsetWidth / tabs.length;
+        this.div = this.shadowRoot.querySelector('div');
+        this.div.style.width = `${this.tabWidth}px`;
     }
 
     /**
@@ -97,6 +102,7 @@ class FunTabs extends HTMLElement {
 
     changeSelectedTab(i) {
         this.setAttribute('selected', i);
+        this.div.style.marginLeft = `${this.tabWidth*i}px`;
     }
 }
 
