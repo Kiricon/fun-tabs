@@ -9,13 +9,13 @@ template.innerHTML = `
             display: block;
         }
 
-        fun-tab {
-            opacity: 0.8;
+        ::slotted(fun-tab) {
+            opacity: 0.6;
             transition: opacity ease 0.3s;
             cursor: pointer;
         }
 
-        fun-tab:hover {
+       ::slotted(fun-tab:hover) {
             opacity: 1;
         }
     </style>
