@@ -14,13 +14,15 @@ template.innerHTML = `
             opacity: 0.6;
             transition: opacity ease 0.3s;
             cursor: pointer;
-            padding: 10px;
+            padding: 10px 15px;
             display: inline-block;
+            text-align: center;
         }
 
-       ::slotted(fun-tab:hover) {
+        ::slotted(fun-tab:hover), ::slotted(fun-tab.selected) {
             opacity: 1;
         }
+
 
         div {
             height: 2px;
@@ -76,6 +78,7 @@ class FunTabs extends HTMLElement {
         this.tabWidth = this.offsetWidth / tabs.length;
         this.div = this.shadowRoot.querySelector('div');
         this.div.style.width = `${this.tabWidth}px`;
+        this.setSelectedTab(this.getAttribute('selected'));
     }
 
     /**
@@ -97,12 +100,22 @@ class FunTabs extends HTMLElement {
      */
     attributeChangedCallback(name, oldValue, newValue) {
         // respond to a changed attribute here
-        console.log(name+" "+newValue);
+        if(name === 'selected' && this.div) {
+            this.setSelectedTab(newValue);
+        }
     }
 
     changeSelectedTab(i) {
         this.setAttribute('selected', i);
-        this.div.style.marginLeft = `${this.tabWidth*i}px`;
+    }
+
+    setSelectedTab(newValue) {
+        this.div.style.marginLeft = `${this.tabWidth*newValue}px`;
+        let tabs = this.querySelectorAll('fun-tab');
+        for(let i = 0; i < tabs.length; i++) {
+            tabs[i].className = '';
+        }
+        tabs[newValue].className = 'selected';
     }
 }
 
