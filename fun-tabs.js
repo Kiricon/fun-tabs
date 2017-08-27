@@ -26,7 +26,7 @@ template.innerHTML = `
         div {
             height: 2px;
             background-color: var(--fun-tabs-color, var(--secondary-color, #673AB7));
-            transition: all ease 0.15s;
+            width: 0px;
         }
     </style>
     <slot></slot>
@@ -80,8 +80,13 @@ class FunTabs extends HTMLElement {
 
         this.tabWidth = this.offsetWidth / tabs.length;
         this.div = this.shadowRoot.querySelector('div');
-        this.div.style.width = `${this.tabWidth}px`;
         this.div.style.marginLeft = `${this.tabWidth*initialIndex}px`
+        this.div.style.width = `${this.tabWidth}px`;
+        window.requestAnimationFrame(() => {
+            this.div.style.transition = 'ease all 0.15s';
+        });
+        
+        
         this.setSelectedTab(initialIndex);
     }
 
@@ -129,6 +134,7 @@ class FunTabs extends HTMLElement {
             this.div.style.marginLeft = `${this.tabWidth*i}px`;
             this.div.style.width = `${this.tabWidth}px`;
             this.isInitial = false;
+            
         }else if(i < this.oldValue) {
             let diff =  this.oldValue - i + 1;
             this.div.style.marginLeft = `${this.tabWidth*i}px`;
