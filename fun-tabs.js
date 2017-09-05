@@ -150,7 +150,7 @@ tabTemplate.innerHTML = `
     <style>
         :host {
             display: table;
-            opacity: 0.6;
+            opacity: 0.8;
             transition: opacity ease 0.3s;
             cursor: pointer;
             padding: 10px 15px;
@@ -159,7 +159,7 @@ tabTemplate.innerHTML = `
         }
 
 
-        :host:hover, :host.selected {
+        :host(:hover), :host(.selected) {
             opacity: 1;
         }
 
