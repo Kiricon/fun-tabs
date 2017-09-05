@@ -77,16 +77,6 @@ class FunTabs extends HTMLElement {
         
     }
 
-    adjustWidth() {
-        let tabs = this.querySelectorAll('fun-tab');
-        let tabIndex = this.getAttribute('selected');
-        this.tabWidth = this.offsetWidth / tabs.length;
-        this.div = this.shadowRoot.querySelector('div');
-        this.div.style.marginLeft = `${this.tabWidth*tabIndex}px`;
-        this.div.style.width = `${this.tabWidth}px`;
-        this.setSelectedTab(tabIndex);
-    }
-
     /**
      * Part of the custom element spec. Called after your element is remove from
      * the DOM. Disconnect any listeners or anything else here.
